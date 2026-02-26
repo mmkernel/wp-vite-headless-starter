@@ -40,7 +40,11 @@ const cache = new Map<string, { timestamp: number; data: any }>();
 // shorter TTL so new posts/categories show up quickly; still caches repeated calls
 const TTL = 1000 * 30; // 30 seconds
 
-const getOrigin = () => (typeof window !== "undefined" ? window.location.origin : process.env.ORIGIN || "https://example.com");
+const getOrigin = () => {
+  if (typeof window !== "undefined") return window.location.origin;
+  if (typeof import.meta !== "undefined" && import.meta.env?.VITE_CANONICAL_BASE) return import.meta.env.VITE_CANONICAL_BASE;
+  return "https://example.com";
+};
 
 export const buildApiBase = (settings: Pick<Settings, "wpBasePath">) => {
   const origin = getOrigin();

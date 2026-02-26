@@ -16,7 +16,7 @@
       "@/*": ["src/*"]
     },
     "jsx": "react-jsx",
-    "types": ["node"]
+    "types": ["node", "vite/client"]
   },
   "include": ["src", "scripts", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
