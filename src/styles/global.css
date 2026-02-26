@@ -1,0 +1,45 @@
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-primary: #2563eb; /* blue-600 */
+  --brand-secondary: #0f172a; /* slate-900 */
+  --brand-accent: #f59e0b; /* amber-500 */
+}
+
+body {
+  @apply bg-white text-slate-900 antialiased;
+}
+
+.container-page {
+  @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-subtle border border-slate-100;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition-colors duration-150;
+}
+
+.btn-primary {
+  @apply bg-brand-primary text-white hover:bg-blue-700;
+}
+
+.btn-outline {
+  @apply border border-slate-200 text-slate-900 hover:border-slate-300;
+}
+
+.link {
+  @apply text-blue-700 hover:text-blue-800 underline-offset-4;
+}
+
+.skeleton {
+  @apply animate-pulse bg-slate-200 rounded;
+}

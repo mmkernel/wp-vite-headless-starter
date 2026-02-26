@@ -1,0 +1,28 @@
+{
+  "canonicalBaseUrl": "",
+  "wpBasePath": "/backend",
+  "brand": {
+    "primary": "blue-600",
+    "secondary": "slate-900",
+    "accent": "amber-500"
+  },
+  "logo": {
+    "text": "HeadlessPress",
+    "imageUrl": ""
+  },
+  "seo": {
+    "titleTemplate": "%s | HeadlessPress",
+    "defaultTitle": "HeadlessPress",
+    "description": "Modern headless WordPress starter with Vite + React.",
+    "ogImage": "",
+    "twitter": {
+      "site": "@example",
+      "creator": "@example"
+    }
+  },
+  "navigation": [
+    { "label": "Home", "path": "/" },
+    { "label": "Blog", "path": "/blog" },
+    { "label": "About", "path": "/page/about" }
+  ]
+}
