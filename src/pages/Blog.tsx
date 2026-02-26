@@ -20,7 +20,7 @@ const BlogPage = () => {
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
-    getPosts(settings, page, 9, controller.signal)
+    getPosts(settings, page, 9, controller.signal, true)
       .then((data) => {
         setPosts(data);
         setError(null);
