@@ -37,7 +37,8 @@ export interface WPCategory {
 }
 
 const cache = new Map<string, { timestamp: number; data: any }>();
-const TTL = 1000 * 60 * 5;
+// shorter TTL so new posts/categories show up quickly; still caches repeated calls
+const TTL = 1000 * 30; // 30 seconds
 
 const getOrigin = () => (typeof window !== "undefined" ? window.location.origin : process.env.ORIGIN || "https://example.com");
 
@@ -78,10 +79,10 @@ const fetchJson = async <T>(url: string, signal?: AbortSignal, cacheKey?: string
   return data;
 };
 
-export const getPosts = async (settings: Settings, page = 1, perPage = 10, signal?: AbortSignal) => {
+export const getPosts = async (settings: Settings, page = 1, perPage = 10, signal?: AbortSignal, force = false) => {
   const api = buildApiBase(settings);
   const url = `${api}/posts?_embed=1&per_page=${perPage}&page=${page}`;
-  return fetchJson<WPPost[]>(url, signal, `posts_${page}`);
+  return fetchJson<WPPost[]>(url, signal, force ? undefined : `posts_${page}`);
 };
 
 export const searchPosts = async (settings: Settings, query: string, signal?: AbortSignal) => {
@@ -90,10 +91,10 @@ export const searchPosts = async (settings: Settings, query: string, signal?: Ab
   return fetchJson<WPPost[]>(url, signal, `search_${query}`);
 };
 
-export const getCategories = async (settings: Settings, signal?: AbortSignal) => {
+export const getCategories = async (settings: Settings, signal?: AbortSignal, force = false) => {
   const api = buildApiBase(settings);
   const url = `${api}/categories?per_page=100`;
-  return fetchJson<WPCategory[]>(url, signal, "categories_all");
+  return fetchJson<WPCategory[]>(url, signal, force ? undefined : "categories_all");
 };
 
 export const getPageBySlug = async (settings: Settings, slug: string, signal?: AbortSignal) => {

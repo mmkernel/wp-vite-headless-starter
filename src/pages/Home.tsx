@@ -17,7 +17,7 @@ const HomePage = () => {
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
-    Promise.all([getPosts(settings, 1, 6, controller.signal), getCategories(settings, controller.signal)])
+    Promise.all([getPosts(settings, 1, 6, controller.signal, true), getCategories(settings, controller.signal, true)])
       .then(([p, c]) => {
         setPosts(p);
         setCategories(c);
@@ -40,35 +40,37 @@ const HomePage = () => {
       <SchemaOrganization name={settings.logo.text} url={baseUrl} logo={settings.logo.imageUrl} />
       <SchemaBreadcrumbs items={[{ name: "Home", url: `${baseUrl}/` }]} />
 
-      <section className="grid md:grid-cols-2 gap-6 items-center">
-        <div className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.2em] text-blue-700">Headless WordPress</p>
-          <h1 className="text-4xl sm:text-5xl font-semibold leading-tight text-slate-900">Lightning-fast content, Apple-clean UI.</h1>
-          <p className="text-lg text-slate-600 max-w-2xl">
-            Consume WordPress content through its REST API, prerender for SEO, and ship a minimal React + Vite front-end.
-          </p>
-          <div className="flex gap-3">
-            <a href="/blog" className="btn btn-primary">Read the blog</a>
-            <a href="#categories" className="btn btn-outline">Browse categories</a>
+      <section className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-white">
+        <div className="container-page grid md:grid-cols-2 gap-6 items-center py-10">
+          <div className="space-y-4">
+            <p className="text-sm uppercase tracking-[0.2em] text-blue-700">Headless WordPress</p>
+            <h1 className="text-4xl sm:text-5xl font-semibold leading-tight text-slate-900">Lightning-fast content, Apple-clean UI.</h1>
+            <p className="text-lg text-slate-600 max-w-2xl">
+              Consume WordPress content through its REST API, prerender for SEO, and ship a minimal React + Vite front-end.
+            </p>
+            <div className="flex gap-3">
+              <a href="/blog" className="btn btn-primary">Read the blog</a>
+              <a href="#categories" className="btn btn-outline">Browse categories</a>
+            </div>
           </div>
-        </div>
-        <div className="card p-6 bg-gradient-to-br from-slate-50 to-white">
-          <div className="grid grid-cols-2 gap-4 text-sm text-slate-700">
-            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 shadow-subtle">
-              <p className="font-semibold">Prerender</p>
-              <p className="text-slate-500">Static HTML for SEO critical routes.</p>
-            </div>
-            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 shadow-subtle">
-              <p className="font-semibold">Live WP</p>
-              <p className="text-slate-500">Powered by WP REST API under /backend.</p>
-            </div>
-            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 shadow-subtle">
-              <p className="font-semibold">Tailwind</p>
-              <p className="text-slate-500">Clean, responsive, accessible UI.</p>
-            </div>
-            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 shadow-subtle">
-              <p className="font-semibold">Admin-lite</p>
-              <p className="text-slate-500">Frontend-only settings, no secrets.</p>
+          <div className="card p-6 bg-gradient-to-br from-slate-50 to-white">
+            <div className="grid grid-cols-2 gap-4 text-sm text-slate-700">
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 shadow-subtle">
+                <p className="font-semibold">Prerender</p>
+                <p className="text-slate-500">Static HTML for SEO critical routes.</p>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 shadow-subtle">
+                <p className="font-semibold">Live WP</p>
+                <p className="text-slate-500">Powered by WP REST API under /backend.</p>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 shadow-subtle">
+                <p className="font-semibold">Tailwind</p>
+                <p className="text-slate-500">Clean, responsive, accessible UI.</p>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 shadow-subtle">
+                <p className="font-semibold">Admin-lite</p>
+                <p className="text-slate-500">Frontend-only settings, no secrets.</p>
+              </div>
             </div>
           </div>
         </div>

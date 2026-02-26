@@ -19,7 +19,7 @@ const CategoryPage = () => {
     if (!slug) return;
     const controller = new AbortController();
     setLoading(true);
-    getCategories(settings, controller.signal)
+    getCategories(settings, controller.signal, true)
       .then((cats) => {
         const found = cats.find((c) => c.slug === slug) || null;
         setCategory(found);
