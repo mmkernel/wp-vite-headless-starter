@@ -17,7 +17,7 @@ const PostCard = ({ post }: { post: WPPost }) => {
       <div className="p-6 flex-1 flex flex-col gap-3">
         <div className="text-xs text-slate-500 flex flex-wrap gap-2">
           <span>{new Date(post.date).toLocaleDateString()}</span>
-          {author && <span>• {author}</span>}
+          {author && <span>by {author}</span>}
           {categories.map((cat) => (
             <span key={cat.id} className="px-2 py-1 bg-slate-100 rounded-full">
               {cat.name}
@@ -32,7 +32,7 @@ const PostCard = ({ post }: { post: WPPost }) => {
         <div className="text-sm text-slate-600" dangerouslySetInnerHTML={{ __html: cleanExcerpt }} />
         <div className="mt-auto pt-3">
           <Link to={`/blog/${post.slug}`} className="text-blue-700 hover:text-blue-800 text-sm">
-            Read more ?
+            Read more â†’
           </Link>
         </div>
       </div>
