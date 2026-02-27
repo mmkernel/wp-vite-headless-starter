@@ -1,15 +1,33 @@
 import { Link } from "react-router-dom";
-import DOMPurify from "dompurify";
 import { WPPost, getFeaturedMediaUrl, getAuthorName, getCategoryObjects } from "../services/wp";
+
+const ALLOWED_TAGS = ["EM", "STRONG", "P", "BR"];
+
+const sanitizeExcerpt = (html: string) => {
+  if (typeof window === "undefined") return html;
+
+  const container = window.document.createElement("div");
+  container.innerHTML = html;
+
+  container.querySelectorAll("*").forEach((el) => {
+    if (!ALLOWED_TAGS.includes(el.tagName)) {
+      const text = window.document.createTextNode(el.textContent ?? "");
+      el.replaceWith(text);
+      return;
+    }
+
+    // strip attributes from allowed tags
+    Array.from(el.attributes).forEach((attr) => el.removeAttribute(attr.name));
+  });
+
+  return container.innerHTML;
+};
 
 const PostCard = ({ post }: { post: WPPost }) => {
   const image = getFeaturedMediaUrl(post);
   const author = getAuthorName(post);
   const categories = getCategoryObjects(post);
-  const cleanExcerpt =
-    typeof window !== "undefined"
-      ? DOMPurify.sanitize(post.excerpt.rendered, { ALLOWED_TAGS: ["em", "strong", "p", "br"] })
-      : post.excerpt.rendered;
+  const cleanExcerpt = sanitizeExcerpt(post.excerpt.rendered);
 
   return (
     <article className="card overflow-hidden flex flex-col h-full">
